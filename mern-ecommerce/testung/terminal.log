@@ -1,0 +1,103 @@
+D:\training mern\mongodb\mongodb_express>curl -X POST http://localhost:5000/api/auth/signup -H "Content-Type: application/json" -d "{\"name\":\"John Doe\",\"email\":\"john@example.com\",\"password\":\"password123\"}"
+{"msg":"User already exists"}
+D:\training mern\mongodb\mongodb_express>curl -X POST http://localhost:5000/api/auth/signup -H "Content-Type: application/json" -d "{\"name\":\"John Doe\",\"email\":\"john@example.com\",\"password\":\"password123\"}"
+
+{"msg":"User already exists"}
+D:\training mern\mongodb\mongodb_express>curl http://localhost:5000/api/products
+[{"_id":"68ba73ac788fd8f4263025bc","name":"Product 1","price":29.99,"description":"A great product","image":"product1.jpg","__v":0},{"_id":"68ba73ac788fd8f4263025bd","name":"Product 2","price":49.99,"description":"Another great product","image":"product2.jpg","__v":0}]
+D:\training mern\mongodb\mongodb_express>curl -X POST http://localhost:5000/api/cart/add -H "Content-Type: application/json" -H "Authorization: Bearer <jwt_token>" -d "{\"productId\":\"66d9e4b2f1a2b3c4d5e6f7a8\",\"quantity\":1}"
+{"msg":"Token is not valid"}
+D:\training mern\mongodb\mongodb_express>curl -X POST http://localhost:5000/api/auth/signup -H "Content-Type: application/json" -d "{\"name\":\"John Doe\",\"email\":\"john@example.com\",\"password\":\"password123\"}"
+
+{"msg":"User already exists"}
+D:\training mern\mongodb\mongodb_express>curl -X POST http://localhost:5000/api/auth/login -H "Content-Type: application/json" -d "{\"email\":\"john@example.com\",\"password\":\"password123\"}"
+{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YmE3NjEwNDJlZmY4ODcwNWY5ZDc1MyIsImlhdCI6MTc1NzA1MjA4MSwiZXhwIjoxNzU3MDU1NjgxfQ.5ySZ-1rp0s9Mn8-0FPElWarPRKt3s81J5MOuE9jorUs","user":{"id":"68ba761042eff88705f9d753","email":"john@example.com","name":"John Doe"}}
+D:\training mern\mongodb\mongodb_express>curl -X POST http://localhost:5000/api/cart/add -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." -d "{\"productId\":\"68ba73ac788fd8f4263025bc\",\"quantity\":1}"
+{"msg":"Token is not valid"}
+D:\training mern\mongodb\mongodb_express>curl -X POST http://localhost:5000/api/auth/login -H "Content-Type: application/json" -d "{\"email\":\"john@example.com\",\"password\":\"password123\"}"
+{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YmE3NjEwNDJlZmY4ODcwNWY5ZDc1MyIsImlhdCI6MTc1NzA1MjMwOSwiZXhwIjoxNzU3MDU1OTA5fQ.X3LEryw2ejxMH_FmZ3GkHweT2ccCjhuLlXcgzTAOXvU","user":{"id":"68ba761042eff88705f9d753","email":"john@example.com","name":"John Doe"}}
+D:\training mern\mongodb\mongodb_express>curl -X POST http://localhost:5000/api/auth/signup -H "Content-Type: application/json" -d "{\"name\":\"John Doe\",\"email\":\"john@example.com\",\"password\":\"password123\"}"
+
+{"msg":"User already exists"}
+D:\training mern\mongodb\mongodb_express>curl -X POST http://localhost:5000/api/cart/add -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." -d "{\"productId\":\"68ba73ac788fd8f4263025bc\",\"quantity\":1}"
+{"msg":"Token is not valid"}
+D:\training mern\mongodb\mongodb_express>curl -X POST http://localhost:5000/api/cart/add -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." -d "{\"productId\":\"68ba73ac788fd8f4263025bd\",\"quantity\":1}"
+{"msg":"Token is not valid"}
+D:\training mern\mongodb\mongodb_express>curl http://localhost:5000/api/products
+[{"_id":"68ba73ac788fd8f4263025bc","name":"Product 1","price":29.99,"description":"A great product","image":"product1.jpg","__v":0},{"_id":"68ba73ac788fd8f4263025bd","name":"Product 2","price":49.99,"description":"Another great product","image":"product2.jpg","__v":0}]
+D:\training mern\mongodb\mongodb_express>curl -X POST http://localhost:5000/api/payment/create-payment-intent -H "Content-Type: application/json" -d "{\"amount\":2999}" // $29.99 in cents
+{"clientSecret":"mock_pi_vkh3wmf7o2o"}curl: (3) URL rejected: No host part in the URL
+curl: (3) URL rejected: Bad hostname
+curl: (6) Could not resolve host: in
+curl: (6) Could not resolve host: cents
+
+D:\training mern\mongodb\mongodb_express>curl -X POST http://localhost:5000/api/payment/process-payment -H "Content-Type: application/json" -d "{\"clientSecret\":\"mock_pi_abc123...\",\"cardDetails\":{\"number\":\"4242424242424242\"}}"
+{"status":"succeeded","message":"Mock payment successful"}
+D:\training mern\mongodb\mongodb_express>curl -X POST http://localhost:5000/api/auth/login -H "Content-Type: application/json" -d "{\"email\":\"john@example.com\",\"password\":\"password123\"}"
+curl: (7) Failed to connect to localhost port 5000 after 2255 ms: Could not connect to server
+
+D:\training mern\mongodb\mongodb_express>curl -X POST http://localhost:5000/api/cart/add -H "Content-Type: application/json" -H "Authorization: Bearer <token>" -d "{\"productId\":\"68ba73ac788fd8f4263025bc\",\"quantity\":1}"
+curl: (7) Failed to connect to localhost port 5000 after 2253 ms: Could not connect to server
+
+D:\training mern\mongodb\mongodb_express>netstat -aon | findstr :5000
+  TCP    0.0.0.0:5000           0.0.0.0:0              LISTENING       8400
+  TCP    [::]:5000              [::]:0                 LISTENING       8400
+  TCP    [::1]:5000             [::1]:56065            ESTABLISHED     8400
+  TCP    [::1]:5000             [::1]:58829            TIME_WAIT       0
+  TCP    [::1]:56065            [::1]:5000             ESTABLISHED     6824
+
+D:\training mern\mongodb\mongodb_express>taskkill /PID <pid> /F
+The system cannot find the file specified.
+
+D:\training mern\mongodb\mongodb_express>curl -X POST http://localhost:5000/api/auth/login -H "Content-Type: application/json" -d "{\"email\":\"john@example.com\",\"password\":\"password123\"}"
+{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YmE3NjEwNDJlZmY4ODcwNWY5ZDc1MyIsImlhdCI6MTc1NzA1MzA1MCwiZXhwIjoxNzU3MDU2NjUwfQ.bu1ngDnZsAe9Ss1b0ENbp5m_CtPeyT4Zw_7kYpSyi2A","user":{"id":"68ba761042eff88705f9d753","email":"john@example.com","name":"John Doe"}}
+D:\training mern\mongodb\mongodb_express>curl -X POST http://localhost:5000/api/cart/add -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." -d "{\"productId\":\"68ba73ac788fd8f4263025bc\",\"quantity\":1}"
+{"msg":"Token is not valid"}
+D:\training mern\mongodb\mongodb_express>curl -X POST http://localhost:5000/api/auth/signup -H "Content-Type: application/json" -d "{\"name\":\"John Doe\",\"email\":\"john@example.com\",\"password\":\"password123\"}"
+
+{"msg":"User already exists"}
+D:\training mern\mongodb\mongodb_express>curl -X POST http://localhost:5000/api/auth/signup -H "Content-Type: application/json" -d "{\"name\":\"John Doe\",\"email\":\"john@example.com\",\"password\":\"password123\"}"
+
+{"msg":"User already exists"}
+D:\training mern\mongodb\mongodb_express>curl -X POST http://localhost:5000/api/auth/login -H "Content-Type: application/json" -d "{\"email\":\"john@example.com\",\"password\":\"password123\"}"
+{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YmE3NjEwNDJlZmY4ODcwNWY5ZDc1MyIsImlhdCI6MTc1NzA1MzE1MCwiZXhwIjoxNzU3MDU2NzUwfQ.M0FLLaAME9O_tsZgFHCKXc9smtuK9C2lh7h7E0jmOgY","user":{"id":"68ba761042eff88705f9d753","email":"john@example.com","name":"John Doe"}}
+D:\training mern\mongodb\mongodb_express>curl -X POST http://localhost:5000/api/auth/login -H "Content-Type: application/json" -d "{\"email\":\"john@example.com\",\"password\":\"password123\"}"
+{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YmE3NjEwNDJlZmY4ODcwNWY5ZDc1MyIsImlhdCI6MTc1NzA1MzE1OSwiZXhwIjoxNzU3MDU2NzU5fQ.rk_AjXIIYKYsEc6CvbYAQ6wcTCLR4dc5XeMsCTf4n_g","user":{"id":"68ba761042eff88705f9d753","email":"john@example.com","name":"John Doe"}}
+D:\training mern\mongodb\mongodb_express>curl -X POST http://localhost:5000/api/payment/create-payment-intent -H "Content-Type: application/json" -d "{\"amount\":2999}" // $29.99 in cents
+{"clientSecret":"mock_pi_1vs75f90n3w"}curl: (3) URL rejected: No host part in the URL
+curl: (3) URL rejected: Bad hostname
+curl: (6) Could not resolve host: in
+curl: (6) Could not resolve host: cents
+
+D:\training mern\mongodb\mongodb_express>curl -X POST http://localhost:5000/api/payment/create-payment-intent -H "Content-Type: application/json" -d "{\"amount\":2999}"
+{"clientSecret":"mock_pi_9q5n4ou9ll8"}
+D:\training mern\mongodb\mongodb_express>curl -X POST http://localhost:5000/api/payment/create-payment-intent -H "Content-Type: application/json" -d "{\"amount\":2999}"
+{"clientSecret":"mock_pi_0zdoksi2opgg"}
+D:\training mern\mongodb\mongodb_express>curl -X POST http://localhost:5000/api/auth/signup -H "Content-Type: application/json" -d "{\"name\":\"John Doe\",\"email\":\"john@example.com\",\"password\":\"password123\"}"
+
+{"msg":"User already exists"}
+D:\training mern\mongodb\mongodb_express>curl -X POST http://localhost:5000/api/payment/create-payment-intent -H "Content-Type: application/json" -d "{\"amount\":2999}"
+{"clientSecret":"mock_pi_1lkotck4j9h"}
+D:\training mern\mongodb\mongodb_express>curl -X POST http://localhost:5000/api/payment/process-payment -H "Content-Type: application/json" -d "{\"clientSecret\":\"mock_pi_1vs75f90n3w\",\"cardDetails\":{\"number\":\"4242424242424242\"}}"
+{"status":"succeeded","message":"Mock payment successful"}
+D:\training mern\mongodb\mongodb_express>curl -X POST http://localhost:5000/api/cart/add -H "Content-Type: application/json" -H "Authorization: Bearer <new_token>" -d "{\"productId\":\"68ba73ac788fd8f4263025bc\",\"quantity\":1}"
+curl: (56) Recv failure: Connection was reset
+
+D:\training mern\mongodb\mongodb_express>curl -X POST http://localhost:5000/api/auth/login -H "Content-Type: application/json" -d "{\"email\":\"john@example.com\",\"password\":\"password123\"}"
+{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YmE3NjEwNDJlZmY4ODcwNWY5ZDc1MyIsImlhdCI6MTc1NzA1MzU2MSwiZXhwIjoxNzU3MDU3MTYxfQ._j1clOBMYvuZ6IO01Ahialj-He8pD1JE_rRTy7SMGd0","user":{"id":"68ba761042eff88705f9d753","email":"john@example.com","name":"John Doe"}}
+D:\training mern\mongodb\mongodb_express>curl -X POST http://localhost:5000/api/cart/add -H "Content-Type: application/json" -H "Authorization: Bearer <new_token>" -d "{\"productId\":\"68ba73ac788fd8f4263025bc\",\"quantity\":1}"
+curl: (56) Recv failure: Connection was reset
+
+D:\training mern\mongodb\mongodb_express>curl -X POST http://localhost:5000/api/cart/add -H "Content-Type: application/json" -H "Authorization: Bearer <new_token>" -d "{\"productId\":\"68ba73ac788fd8f4263025bc\",\"quantity\":1}"
+curl: (56) Recv failure: Connection was reset
+
+D:\training mern\mongodb\mongodb_express>curl -X POST http://localhost:5000/api/auth/signup -H "Content-Type: application/json" -d "{\"name\":\"John Doe\",\"email\":\"john@example.com\",\"password\":\"password123\"}"
+
+{"msg":"User already exists"}
+D:\training mern\mongodb\mongodb_express>curl -X POST http://localhost:5000/api/auth/login -H "Content-Type: application/json" -d "{\"email\":\"john@example.com\",\"password\":\"password123\"}"
+{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YmE3NjEwNDJlZmY4ODcwNWY5ZDc1MyIsImlhdCI6MTc1NzA1Mzc1OSwiZXhwIjoxNzU3MDU3MzU5fQ.kjQYBx5b3JSNy9gQLUQCJDTzK6mCE2xqqtYvVfITLj8","user":{"id":"68ba761042eff88705f9d753","email":"john@example.com","name":"John Doe"}}
+D:\training mern\mongodb\mongodb_express>curl -X POST http://localhost:5000/api/cart/add -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." -d "{\"productId\":\"68ba73ac788fd8f4263025bc\",\"quantity\":1}"
+curl: (56) Recv failure: Connection was reset
+
+D:\training mern\mongodb\mongodb_express>
+
